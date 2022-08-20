@@ -1,0 +1,16 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "author": "Kashish Vaish <kashishvaish.kv@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "jest": "^28.1.3"
+  }
+}
