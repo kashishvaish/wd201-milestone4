@@ -1,6 +1,6 @@
 let todoList = require("../todo");
 
-const { all, markAsComplete, add, overdue } = todoList();
+const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
 /* eslint-disable no-undef */
 describe("Todo List Test Suite", () => {
   test("Should add a new todo", () => {
@@ -36,5 +36,34 @@ describe("Todo List Test Suite", () => {
     expect(all.length).toEqual(2);
     overdueItems = overdue();
     expect(overdueItems.length).toBe(1);
+  });
+
+  test("Should return items due today", () => {
+    expect(all.length).toEqual(2);
+    const today = new Date();
+    add({
+      title: "A test item due today",
+      completed: false,
+      dueDate: new Date(today.getTime()).toLocaleDateString("en-CA"),
+    });
+    expect(all.length).toEqual(3);
+    dueTodayItems = dueToday();
+    expect(dueTodayItems.length).toBe(2);
+  });
+
+  test("Should return items due later", () => {
+    expect(all.length).toEqual(3);
+    const today = new Date();
+    const oneDay = 60 * 60 * 24 * 1000;
+    add({
+      title: "A test item due later",
+      completed: false,
+      dueDate: new Date(today.getTime() + 2 * oneDay).toLocaleDateString(
+        "en-CA"
+      ),
+    });
+    expect(all.length).toEqual(4);
+    dueLaterItems = dueLater();
+    expect(dueLaterItems.length).toBe(1);
   });
 });
